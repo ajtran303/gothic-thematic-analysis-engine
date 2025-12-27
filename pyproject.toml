@@ -6,3 +6,17 @@ requires-python = ">=3.10"
 dependencies = [
     "pyyaml>=6.0",
 ]
+
+[project.optional-dependencies]
+labeler = [
+    "fastapi>=0.100",
+    "uvicorn>=0.20",
+    "jinja2>=3.0",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = []

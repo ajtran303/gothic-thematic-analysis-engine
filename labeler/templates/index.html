@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gothic Theme Labeler</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Gothic Theme Labeler</h1>
+        </header>
+
+        <section class="progress-section">
+            <h2>Progress</h2>
+            <div class="progress-bars">
+                <div class="progress-row">
+                    <span class="split-name">Train:</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-train"></div>
+                    </div>
+                    <span class="progress-text" id="progress-train-text">0 / 400</span>
+                </div>
+                <div class="progress-row">
+                    <span class="split-name">Val:</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-val"></div>
+                    </div>
+                    <span class="progress-text" id="progress-val-text">0 / 75</span>
+                </div>
+                <div class="progress-row">
+                    <span class="split-name">Test:</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-test"></div>
+                    </div>
+                    <span class="progress-text" id="progress-test-text">0 / 75</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="passage-section">
+            <div class="passage-meta">
+                <span>Currently labeling: <strong id="current-split">-</strong></span>
+                <span>Source: <strong id="passage-source">-</strong></span>
+            </div>
+            <div class="passage-text" id="passage-text">
+                Loading...
+            </div>
+        </section>
+
+        <section class="themes-section">
+            <h2>Themes <span class="hint">(select all that apply)</span></h2>
+            <div class="themes-grid">
+                {% for theme in themes %}
+                <label class="theme-checkbox" title="{{ theme.description }}">
+                    <input type="checkbox" name="theme" value="{{ theme.name }}" data-index="{{ loop.index0 }}">
+                    <span class="theme-name">{{ theme.name }}</span>
+                    <span class="shortcut">{{ loop.index if loop.index < 10 else ('0' if loop.index == 10 else ('-' if loop.index == 11 else '=')) }}</span>
+                </label>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="actions-section">
+            <button id="btn-submit" class="btn btn-primary">Submit & Next <span class="shortcut">Enter</span></button>
+            <button id="btn-skip" class="btn btn-secondary">Skip <span class="shortcut">S</span></button>
+            <button id="btn-undo" class="btn btn-secondary">Undo <span class="shortcut">U</span></button>
+        </section>
+
+        <section class="shortcuts-section">
+            <h3>Keyboard Shortcuts</h3>
+            <p><kbd>1</kbd>-<kbd>9</kbd>, <kbd>0</kbd>, <kbd>-</kbd>, <kbd>=</kbd> Toggle themes &nbsp;|&nbsp; <kbd>Enter</kbd> Submit &nbsp;|&nbsp; <kbd>S</kbd> Skip &nbsp;|&nbsp; <kbd>U</kbd> Undo</p>
+        </section>
+
+        <div id="done-message" class="done-message" style="display: none;">
+            <h2>All done!</h2>
+            <p>You've completed all labeling targets.</p>
+        </div>
+    </div>
+
+    <script>
+        let currentPassage = null;
+
+        // Load next passage
+        async function loadNext() {
+            const res = await fetch('/api/next');
+            const data = await res.json();
+
+            updateProgress(data.progress);
+
+            if (data.done) {
+                showDone();
+                return;
+            }
+
+            currentPassage = data.passage;
+            document.getElementById('passage-text').textContent = currentPassage.text;
+            document.getElementById('current-split').textContent = data.current_split;
+            document.getElementById('passage-source').textContent =
+                `${currentPassage.author} - ${currentPassage.title}`;
+
+            // Clear all checkboxes
+            document.querySelectorAll('input[name="theme"]').forEach(cb => cb.checked = false);
+        }
+
+        // Update progress bars
+        function updateProgress(progress) {
+            for (const [split, data] of Object.entries(progress)) {
+                const pct = Math.min(100, (data.current / data.target) * 100);
+                document.getElementById(`progress-${split}`).style.width = `${pct}%`;
+                document.getElementById(`progress-${split}-text`).textContent =
+                    `${data.current} / ${data.target}`;
+            }
+        }
+
+        // Show done message
+        function showDone() {
+            document.querySelector('.passage-section').style.display = 'none';
+            document.querySelector('.themes-section').style.display = 'none';
+            document.querySelector('.actions-section').style.display = 'none';
+            document.getElementById('done-message').style.display = 'block';
+        }
+
+        // Submit label
+        async function submitLabel() {
+            if (!currentPassage) return;
+
+            const themes = Array.from(document.querySelectorAll('input[name="theme"]:checked'))
+                .map(cb => cb.value);
+
+            await fetch('/api/label', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({id: currentPassage.id, themes})
+            });
+
+            loadNext();
+        }
+
+        // Skip passage
+        async function skipPassage() {
+            if (!currentPassage) return;
+
+            await fetch('/api/skip', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({id: currentPassage.id})
+            });
+
+            loadNext();
+        }
+
+        // Undo last label
+        async function undoLabel() {
+            const res = await fetch('/api/undo', {method: 'POST'});
+            const data = await res.json();
+
+            if (data.error) {
+                console.log(data.error);
+                return;
+            }
+
+            currentPassage = data.passage;
+            document.getElementById('passage-text').textContent = currentPassage.text;
+            document.getElementById('passage-source').textContent =
+                `${currentPassage.author} - ${currentPassage.title}`;
+
+            // Restore previous theme selections
+            document.querySelectorAll('input[name="theme"]').forEach(cb => {
+                cb.checked = data.previous_themes.includes(cb.value);
+            });
+
+            updateProgress(data.progress);
+        }
+
+        // Toggle theme by index
+        function toggleTheme(index) {
+            const checkboxes = document.querySelectorAll('input[name="theme"]');
+            if (index < checkboxes.length) {
+                checkboxes[index].checked = !checkboxes[index].checked;
+            }
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            // Ignore if typing in an input
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+            const key = e.key.toLowerCase();
+
+            if (key === 'enter') {
+                e.preventDefault();
+                submitLabel();
+            } else if (key === 's') {
+                e.preventDefault();
+                skipPassage();
+            } else if (key === 'u') {
+                e.preventDefault();
+                undoLabel();
+            } else if (key >= '1' && key <= '9') {
+                toggleTheme(parseInt(key) - 1);
+            } else if (key === '0') {
+                toggleTheme(9);
+            } else if (key === '-') {
+                toggleTheme(10);
+            } else if (key === '=') {
+                toggleTheme(11);
+            }
+        });
+
+        // Button handlers
+        document.getElementById('btn-submit').addEventListener('click', submitLabel);
+        document.getElementById('btn-skip').addEventListener('click', skipPassage);
+        document.getElementById('btn-undo').addEventListener('click', undoLabel);
+
+        // Initial load
+        loadNext();
+    </script>
+</body>
+</html>
