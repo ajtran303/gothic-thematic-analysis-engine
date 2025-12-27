@@ -141,6 +141,7 @@ async def label_passage(request: Request):
     data = await request.json()
     passage_id = data.get("id")
     themes = data.get("themes", [])
+    split = data.get("split", "train")
 
     if not passage_id:
         return {"error": "Missing passage ID"}
@@ -157,6 +158,7 @@ async def label_passage(request: Request):
     # Add new label
     labels["labeled"].append({
         "id": passage_id,
+        "split": split,
         "themes": themes,
         "labeled_at": datetime.utcnow().isoformat() + "Z"
     })

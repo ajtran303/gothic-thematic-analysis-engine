@@ -7,71 +7,72 @@
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <div class="container">
+    <div class="layout">
         <header>
-            <h1>Gothic Theme Labeler</h1>
-        </header>
+                <h1>Gothic Theme Labeler</h1>
+            </header>
 
-        <section class="progress-section">
-            <h2>Progress</h2>
-            <div class="progress-bars">
-                <div class="progress-row">
-                    <span class="split-name">Train:</span>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="progress-train"></div>
+            <section class="progress-section">
+                <h2>Progress</h2>
+                <div class="progress-bars">
+                    <div class="progress-row">
+                        <span class="split-name">Train:</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-train"></div>
+                        </div>
+                        <span class="progress-text" id="progress-train-text">0 / 400</span>
                     </div>
-                    <span class="progress-text" id="progress-train-text">0 / 400</span>
-                </div>
-                <div class="progress-row">
-                    <span class="split-name">Val:</span>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="progress-val"></div>
+                    <div class="progress-row">
+                        <span class="split-name">Val:</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-val"></div>
+                        </div>
+                        <span class="progress-text" id="progress-val-text">0 / 75</span>
                     </div>
-                    <span class="progress-text" id="progress-val-text">0 / 75</span>
-                </div>
-                <div class="progress-row">
-                    <span class="split-name">Test:</span>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="progress-test"></div>
+                    <div class="progress-row">
+                        <span class="split-name">Test:</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-test"></div>
+                        </div>
+                        <span class="progress-text" id="progress-test-text">0 / 75</span>
                     </div>
-                    <span class="progress-text" id="progress-test-text">0 / 75</span>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section class="passage-section">
-            <div class="passage-meta">
-                <span>Currently labeling: <strong id="current-split">-</strong></span>
-                <span>Source: <strong id="passage-source">-</strong></span>
-            </div>
-            <div class="passage-text" id="passage-text">
-                Loading...
-            </div>
-        </section>
+            <section class="passage-section">
+                <div class="passage-meta">
+                    <span>Currently labeling: <strong id="current-split">-</strong></span>
+                    <span>Source: <strong id="passage-source">-</strong></span>
+                </div>
+                <div class="passage-text" id="passage-text">
+                    Loading...
+                </div>
+            </section>
 
-        <section class="themes-section">
-            <h2>Themes <span class="hint">(select all that apply)</span></h2>
-            <div class="themes-grid">
-                {% for theme in themes %}
-                <label class="theme-checkbox" title="{{ theme.description }}">
-                    <input type="checkbox" name="theme" value="{{ theme.name }}" data-index="{{ loop.index0 }}">
-                    <span class="theme-name">{{ theme.name }}</span>
-                    <span class="shortcut">{{ loop.index if loop.index < 10 else ('0' if loop.index == 10 else ('-' if loop.index == 11 else '=')) }}</span>
-                </label>
-                {% endfor %}
-            </div>
-        </section>
+            <section class="themes-section">
+                <h2>Themes <span class="hint">(select all that apply)</span></h2>
+                <div class="themes-grid">
+                    {% for theme in themes %}
+                    <label class="theme-checkbox">
+                        <input type="checkbox" name="theme" value="{{ theme.name }}" data-index="{{ loop.index0 }}">
+                        <span class="theme-name">{{ theme.name }}</span>
+                        <span class="shortcut">{{ loop.index if loop.index < 10 else ('0' if loop.index == 10 else ('-' if loop.index == 11 else '=')) }}</span>
+                        <span class="tooltip">{{ theme.description }}</span>
+                    </label>
+                    {% endfor %}
+                </div>
+            </section>
 
-        <section class="actions-section">
-            <button id="btn-submit" class="btn btn-primary">Submit & Next <span class="shortcut">Enter</span></button>
-            <button id="btn-skip" class="btn btn-secondary">Skip <span class="shortcut">S</span></button>
-            <button id="btn-undo" class="btn btn-secondary">Undo <span class="shortcut">U</span></button>
-        </section>
+            <section class="actions-section">
+                <button id="btn-submit" class="btn btn-primary">Submit & Next <span class="shortcut">Enter</span></button>
+                <button id="btn-skip" class="btn btn-secondary">Skip <span class="shortcut">S</span></button>
+                <button id="btn-undo" class="btn btn-secondary">Undo <span class="shortcut">U</span></button>
+            </section>
 
-        <section class="shortcuts-section">
-            <h3>Keyboard Shortcuts</h3>
-            <p><kbd>1</kbd>-<kbd>9</kbd>, <kbd>0</kbd>, <kbd>-</kbd>, <kbd>=</kbd> Toggle themes &nbsp;|&nbsp; <kbd>Enter</kbd> Submit &nbsp;|&nbsp; <kbd>S</kbd> Skip &nbsp;|&nbsp; <kbd>U</kbd> Undo</p>
-        </section>
+            <section class="shortcuts-section">
+                <h3>Keyboard Shortcuts</h3>
+                <p><kbd>1</kbd>-<kbd>9</kbd>, <kbd>0</kbd>, <kbd>-</kbd>, <kbd>=</kbd> Toggle themes | <kbd>Enter</kbd> Submit | <kbd>S</kbd> Skip | <kbd>U</kbd> Undo</p>
+            </section>
 
         <div id="done-message" class="done-message" style="display: none;">
             <h2>All done!</h2>
@@ -82,7 +83,6 @@
     <script>
         let currentPassage = null;
 
-        // Load next passage
         async function loadNext() {
             const res = await fetch('/api/next');
             const data = await res.json();
@@ -95,16 +95,16 @@
             }
 
             currentPassage = data.passage;
-            document.getElementById('passage-text').textContent = currentPassage.text;
+            const passageEl = document.getElementById('passage-text');
+            passageEl.textContent = currentPassage.text;
+            passageEl.scrollTop = 0;
             document.getElementById('current-split').textContent = data.current_split;
             document.getElementById('passage-source').textContent =
                 `${currentPassage.author} - ${currentPassage.title}`;
 
-            // Clear all checkboxes
             document.querySelectorAll('input[name="theme"]').forEach(cb => cb.checked = false);
         }
 
-        // Update progress bars
         function updateProgress(progress) {
             for (const [split, data] of Object.entries(progress)) {
                 const pct = Math.min(100, (data.current / data.target) * 100);
@@ -114,7 +114,6 @@
             }
         }
 
-        // Show done message
         function showDone() {
             document.querySelector('.passage-section').style.display = 'none';
             document.querySelector('.themes-section').style.display = 'none';
@@ -122,7 +121,6 @@
             document.getElementById('done-message').style.display = 'block';
         }
 
-        // Submit label
         async function submitLabel() {
             if (!currentPassage) return;
 
@@ -132,13 +130,12 @@
             await fetch('/api/label', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({id: currentPassage.id, themes})
+                body: JSON.stringify({id: currentPassage.id, split: currentPassage.split, themes})
             });
 
             loadNext();
         }
 
-        // Skip passage
         async function skipPassage() {
             if (!currentPassage) return;
 
@@ -151,7 +148,6 @@
             loadNext();
         }
 
-        // Undo last label
         async function undoLabel() {
             const res = await fetch('/api/undo', {method: 'POST'});
             const data = await res.json();
@@ -166,7 +162,6 @@
             document.getElementById('passage-source').textContent =
                 `${currentPassage.author} - ${currentPassage.title}`;
 
-            // Restore previous theme selections
             document.querySelectorAll('input[name="theme"]').forEach(cb => {
                 cb.checked = data.previous_themes.includes(cb.value);
             });
@@ -174,7 +169,6 @@
             updateProgress(data.progress);
         }
 
-        // Toggle theme by index
         function toggleTheme(index) {
             const checkboxes = document.querySelectorAll('input[name="theme"]');
             if (index < checkboxes.length) {
@@ -182,9 +176,7 @@
             }
         }
 
-        // Keyboard shortcuts
         document.addEventListener('keydown', (e) => {
-            // Ignore if typing in an input
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
             const key = e.key.toLowerCase();
@@ -209,12 +201,10 @@
             }
         });
 
-        // Button handlers
         document.getElementById('btn-submit').addEventListener('click', submitLabel);
         document.getElementById('btn-skip').addEventListener('click', skipPassage);
         document.getElementById('btn-undo').addEventListener('click', undoLabel);
 
-        // Initial load
         loadNext();
     </script>
 </body>

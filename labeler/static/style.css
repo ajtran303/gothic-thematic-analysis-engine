@@ -24,8 +24,8 @@ body {
     min-height: 100vh;
 }
 
-.container {
-    max-width: 900px;
+.layout {
+    max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
 }
@@ -107,12 +107,12 @@ h2 .hint {
 }
 
 .passage-text {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     line-height: 1.8;
     padding: 1.5rem;
     background: var(--bg);
     border-radius: 6px;
-    max-height: 400px;
+    max-height: 450px;
     overflow-y: auto;
     white-space: pre-wrap;
 }
@@ -120,8 +120,10 @@ h2 .hint {
 /* Themes Section */
 .themes-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(6, 1fr);
     gap: 0.75rem;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .theme-checkbox {
@@ -165,6 +167,50 @@ h2 .hint {
 .theme-checkbox:has(input:checked) .shortcut {
     background: rgba(0, 0, 0, 0.2);
     color: var(--text);
+}
+
+/* Custom Tooltip */
+.tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-lighter);
+    color: var(--text);
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 400;
+    line-height: 1.4;
+    white-space: normal;
+    width: max-content;
+    max-width: 250px;
+    margin-bottom: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.15s ease, visibility 0.15s ease;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+}
+
+.tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: var(--bg-lighter);
+}
+
+.theme-checkbox {
+    position: relative;
+}
+
+.theme-checkbox:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
 }
 
 /* Actions Section */
