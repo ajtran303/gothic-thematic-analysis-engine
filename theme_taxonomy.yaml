@@ -1,0 +1,96 @@
+themes:
+  - name: supernatural
+    description: Vampires, ghosts, apparitions, the undead, or other supernatural phenomena.
+    indicators:
+      - vampire, vampyre, ghost, phantom, spectre
+      - apparition, spirit, undead, haunted
+      - supernatural, unearthly, from the grave
+      - embalmed, risen, visitation
+
+  - name: imprisonment
+    description: Physical captivity, confinement, or detention. Escape attempts and rescue.
+    indicators:
+      - prisoner, captive, confined, detained
+      - dungeon, cell, tower, locked, chains
+      - escape, fled, rescue, deliverance
+      - seized, entrapped, held against will
+
+  - name: secrecy
+    description: Hidden information, concealed identities, or characters withholding truth.
+    indicators:
+      - secret, concealed, hidden, mysterious
+      - disguise, unknown, veiled, enigmatic
+      - revealed, discovered, confession
+      - whispered, cryptic, undisclosed
+
+  - name: love
+    description: Romantic attachment, courtship, passion, or heartbreak.
+    indicators:
+      - love, beloved, passion, affection
+      - lover, suitor, marriage, betrothed
+      - tender, devoted, longing, jealous
+      - kiss, embrace, wedding, parting
+
+  - name: death
+    description: Dying, corpses, murder, or confronting mortality. Grief and mourning.
+    indicators:
+      - death, dying, dead, corpse, body
+      - grave, tomb, funeral, burial, murder
+      - grief, mourning, loss, killed
+      - last breath, expired, lifeless
+
+  - name: persecution
+    description: Characters threatened, pursued, or victimized. Villains and injustice.
+    indicators:
+      - villain, tyrant, persecutor, enemy
+      - pursued, threatened, hunted, accused
+      - scheme, plot, treachery, revenge
+      - victim, injustice, oppression
+
+  - name: family
+    description: Parent-child bonds, inheritance, lineage, and duty to kin.
+    indicators:
+      - father, mother, parent, son, daughter
+      - inheritance, heir, estate, fortune
+      - ancestor, lineage, bloodline
+      - duty, consent, forbid, disobey
+
+  - name: melancholy
+    description: Sadness, regret, emotional suffering, or despair.
+    indicators:
+      - melancholy, sorrow, grief, despair
+      - tears, weeping, sighing, dejected
+      - gloomy, wretched, miserable
+      - regret, lament, anguish, woe
+
+  - name: religion
+    description: Clergy, churches, monasteries, or spiritual matters.
+    indicators:
+      - priest, friar, monk, nun, confessor
+      - church, chapel, monastery, convent
+      - prayer, blessing, sin, confession
+      - heaven, hell, soul, sacred
+
+  - name: terror
+    description: Intense fear, horror, dread, or fright.
+    indicators:
+      - terror, horror, dread, fright, fear
+      - trembling, shuddering, pale, gasped
+      - scream, shriek, alarmed, panic
+      - nightmare, apprehension, aghast
+
+  - name: isolation
+    description: Loneliness, solitude, or separation from others. Wanting companionship.
+    indicators:
+      - alone, lonely, solitary, isolated
+      - abandoned, forsaken, deserted
+      - no friend, no companion, separated
+      - exile, outcast, estranged
+
+  - name: nature
+    description: Storms, wilderness, moonlight, or atmospheric natural settings.
+    indicators:
+      - storm, tempest, thunder, lightning
+      - moon, moonlight, night, darkness
+      - forest, wilderness, mountain, sea
+      - wind, rain, mist, shadows

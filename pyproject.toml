@@ -1,0 +1,8 @@
+[project]
+name = "gothic-thematic-analysis-engine"
+version = "0.1.0"
+description = "NLP system for analyzing and generating Gothic literature with controllable themes"
+requires-python = ">=3.10"
+dependencies = [
+    "pyyaml>=6.0",
+]

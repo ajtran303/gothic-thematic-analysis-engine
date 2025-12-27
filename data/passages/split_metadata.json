@@ -1,0 +1,70 @@
+{
+  "random_seed": 42,
+  "ratios": {
+    "train": 0.75,
+    "val": 0.125,
+    "test": 0.125
+  },
+  "splits": {
+    "train": {
+      "novels": [
+        "Ainsworth_Rookwood",
+        "Bronte_JaneEyre",
+        "Brown_ArthurMervyn",
+        "Brown_Ormond",
+        "Brown_Wieland",
+        "Godwin_CalebWilliams",
+        "Godwin_StLeon",
+        "Haggard_She",
+        "Hawthorne_TheHouseOfTheSevenGables",
+        "Hogg_PrivateMemoirs",
+        "Lewis_TheMonk",
+        "Maturin_Melmoth",
+        "Parsons_TheCastleOfWolfenbach",
+        "Radcliffe_ASicilianRomance",
+        "Radcliffe_TheItalian",
+        "Radcliffe_TheRomanceOfTheForest",
+        "Reeve_TheOldEnglishBaron",
+        "Roche_TheChildrenOfTheAbbey",
+        "Rymer_VarneyTheVampire",
+        "ShelleyMary_Frankenstein",
+        "Sleath_TheOrphanOfTheRhine",
+        "Smith_Emmeline",
+        "Smith_TheOldManorHouse",
+        "Stevenson_DrJekyllAndMrHyde",
+        "Stoker_Dracula",
+        "Teutold-Kahlert_TheNecromancer",
+        "Walpole_TheCastleOfOtranto",
+        "Wilde_ThePictureOfDorianGray"
+      ],
+      "novel_count": 28,
+      "chunk_count": 8906
+    },
+    "val": {
+      "novels": [
+        "Dickens_BleakHouse",
+        "Radcliffe_TheCastlesOfAthlynAndDunbayne",
+        "Radcliffe_TheMysteriesOfUdolpho",
+        "Schiller_TheGhostSeer"
+      ],
+      "novel_count": 4,
+      "chunk_count": 1619
+    },
+    "test": {
+      "novels": [
+        "BronteEmily_WutheringHeights",
+        "Dickens_GreatExpectations",
+        "Dickens_TheMysteryOfEdwinDrood",
+        "LeFanu_Carmilla",
+        "Leroux_ThePhantomOfTheOpera",
+        "Machen_TheGreatGodPan"
+      ],
+      "novel_count": 6,
+      "chunk_count": 1182
+    }
+  },
+  "totals": {
+    "novels": 38,
+    "chunks": 11707
+  }
+}
