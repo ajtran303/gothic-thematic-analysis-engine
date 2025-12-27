@@ -34,8 +34,61 @@
         "persecution"
       ],
       "labeled_at": "2025-12-27T20:20:20.585643Z"
+    },
+    {
+      "id": "Godwin_StLeon_Gutenberg_0043",
+      "split": "train",
+      "themes": [
+        "nature"
+      ],
+      "labeled_at": "2025-12-27T20:21:33.762129Z"
+    },
+    {
+      "id": "Godwin_CalebWilliams_Gutenberg_0062",
+      "split": "train",
+      "themes": [
+        "imprisonment",
+        "love",
+        "family"
+      ],
+      "labeled_at": "2025-12-27T20:22:50.295826Z"
+    },
+    {
+      "id": "Haggard_She_Gutenberg_0097",
+      "split": "train",
+      "themes": [
+        "religion",
+        "nature"
+      ],
+      "labeled_at": "2025-12-27T20:23:27.736782Z"
+    },
+    {
+      "id": "Radcliffe_TheRomanceOfTheForest_Adelaide_0015",
+      "split": "train",
+      "themes": [
+        "nature"
+      ],
+      "labeled_at": "2025-12-27T20:24:16.300281Z"
+    },
+    {
+      "id": "Dickens_BleakHouse_Gutenberg_0705",
+      "split": "val",
+      "themes": [
+        "imprisonment",
+        "secrecy",
+        "family"
+      ],
+      "labeled_at": "2025-12-27T20:25:16.640891Z"
+    },
+    {
+      "id": "BronteEmily_WutheringHeights_Gutenberg_0005",
+      "split": "test",
+      "themes": [
+        "nature"
+      ],
+      "labeled_at": "2025-12-27T20:26:46.284691Z"
     }
   ],
   "skipped": [],
-  "last_updated": "2025-12-27T20:20:20.585669Z"
+  "last_updated": "2025-12-27T20:26:46.284712Z"
 }
