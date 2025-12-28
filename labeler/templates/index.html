@@ -56,7 +56,7 @@
                     <label class="theme-checkbox">
                         <input type="checkbox" name="theme" value="{{ theme.name }}" data-index="{{ loop.index0 }}">
                         <span class="theme-name">{{ theme.name }}</span>
-                        <span class="shortcut">{{ loop.index if loop.index < 10 else ('0' if loop.index == 10 else ('-' if loop.index == 11 else '=')) }}</span>
+                        <span class="shortcut">{{ loop.index if loop.index < 10 else ('0' if loop.index == 10 else ('-' if loop.index == 11 else ('=' if loop.index == 12 else 'Q'))) }}</span>
                         <span class="tooltip">{{ theme.description }}</span>
                     </label>
                     {% endfor %}
@@ -71,7 +71,7 @@
 
             <section class="shortcuts-section">
                 <h3>Keyboard Shortcuts</h3>
-                <p><kbd>1</kbd>-<kbd>9</kbd>, <kbd>0</kbd>, <kbd>-</kbd>, <kbd>=</kbd> Toggle themes | <kbd>Enter</kbd> Submit | <kbd>S</kbd> Skip | <kbd>U</kbd> Undo</p>
+                <p><kbd>1</kbd>-<kbd>9</kbd>, <kbd>0</kbd>, <kbd>-</kbd>, <kbd>=</kbd>, <kbd>Q</kbd> Toggle themes | <kbd>Enter</kbd> Submit | <kbd>S</kbd> Skip | <kbd>U</kbd> Undo</p>
             </section>
 
         <div id="done-message" class="done-message" style="display: none;">
@@ -198,6 +198,8 @@
                 toggleTheme(10);
             } else if (key === '=') {
                 toggleTheme(11);
+            } else if (key === 'q') {
+                toggleTheme(12);
             }
         });
 

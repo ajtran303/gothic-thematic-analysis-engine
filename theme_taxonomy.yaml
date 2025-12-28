@@ -96,3 +96,11 @@ themes:
       - wind, rain, mist, shadows
       - castle, tower, dungeon, ruin
       - abbey, cathedral, vault, crypt
+
+  - name: madness
+    description: Insanity, mental instability, delirium, or psychological breakdown.
+    indicators:
+      - mad, madness, insane, insanity
+      - delirium, delirious, frenzied, frenzy
+      - lunatic, maniac, deranged, unhinged
+      - raving, distracted, disordered mind

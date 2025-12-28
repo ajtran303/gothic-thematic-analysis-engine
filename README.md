@@ -15,22 +15,23 @@ An NLP system for analyzing Gothic literature for thematic content and generatin
 
 ## Theme Taxonomy
 
-12 themes derived from corpus sampling:
+13 themes derived from corpus sampling:
 
-| Theme | Description |
-|-------|-------------|
-| supernatural | Vampires, ghosts, apparitions, the undead |
-| imprisonment | Physical captivity, confinement, escape attempts |
-| secrecy | Hidden information, concealed identities |
-| love | Romantic attachment, courtship, passion |
-| death | Dying, murder, grief, confronting mortality |
-| persecution | Characters threatened, pursued, or victimized |
-| family | Parent-child bonds, inheritance, lineage |
-| melancholy | Sadness, regret, emotional suffering |
-| religion | Clergy, churches, monasteries, spiritual matters |
-| terror | Intense fear, horror, dread |
-| isolation | Loneliness, solitude, separation |
-| setting | Atmospheric environments—storms, wilderness, Gothic architecture |
+| Theme        | Description                                                      |
+| ------------ | ---------------------------------------------------------------- |
+| supernatural | Vampires, ghosts, apparitions, the undead                        |
+| imprisonment | Physical captivity, confinement, escape attempts                 |
+| secrecy      | Hidden information, concealed identities                         |
+| love         | Romantic attachment, courtship, passion                          |
+| death        | Dying, murder, grief, confronting mortality                      |
+| persecution  | Characters threatened, pursued, or victimized                    |
+| family       | Parent-child bonds, inheritance, lineage                         |
+| melancholy   | Sadness, regret, emotional suffering                             |
+| religion     | Clergy, churches, monasteries, spiritual matters                 |
+| terror       | Intense fear, horror, dread                                      |
+| isolation    | Loneliness, solitude, separation                                 |
+| setting      | Atmospheric environments—storms, wilderness, Gothic architecture |
+| madness      | Insanity, mental instability, delirium, psychological breakdown  |
 
 ## Labeling Tool
 
@@ -54,7 +55,7 @@ uvicorn labeler.app:app --reload
 
 ### Keyboard Shortcuts
 
-- `1-9`, `0`, `-`, `=` - Toggle themes
+- `1-9`, `0`, `-`, `=`, `Q` - Toggle themes
 - `Enter` - Submit and next
 - `S` - Skip passage
 - `U` - Undo last label
