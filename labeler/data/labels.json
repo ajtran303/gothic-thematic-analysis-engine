@@ -87,8 +87,436 @@
         "nature"
       ],
       "labeled_at": "2025-12-27T20:26:46.284691Z"
+    },
+    {
+      "id": "Roche_TheChildrenOfTheAbbey_OTA_0316",
+      "split": "train",
+      "themes": [
+        "family",
+        "melancholy"
+      ],
+      "labeled_at": "2025-12-27T21:41:07.326266Z"
+    },
+    {
+      "id": "Rymer_VarneyTheVampire_Gutenberg_0393",
+      "split": "train",
+      "themes": [
+        "secrecy",
+        "death"
+      ],
+      "labeled_at": "2025-12-27T21:41:59.186301Z"
+    },
+    {
+      "id": "Radcliffe_ASicilianRomance_Gutenberg_0100",
+      "split": "train",
+      "themes": [
+        "family",
+        "melancholy"
+      ],
+      "labeled_at": "2025-12-27T21:43:17.462082Z"
+    },
+    {
+      "id": "Radcliffe_TheRomanceOfTheForest_Adelaide_0081",
+      "split": "train",
+      "themes": [
+        "secrecy"
+      ],
+      "labeled_at": "2025-12-27T21:44:11.665729Z"
+    },
+    {
+      "id": "Smith_TheOldManorHouse_WomenWriters_0253",
+      "split": "train",
+      "themes": [
+        "family",
+        "terror"
+      ],
+      "labeled_at": "2025-12-27T21:45:01.768831Z"
+    },
+    {
+      "id": "Dickens_BleakHouse_Gutenberg_0665",
+      "split": "val",
+      "themes": [
+        "persecution"
+      ],
+      "labeled_at": "2025-12-27T21:46:01.921750Z"
+    },
+    {
+      "id": "Leroux_ThePhantomOfTheOpera_Gutenberg_0127",
+      "split": "test",
+      "themes": [
+        "secrecy",
+        "death"
+      ],
+      "labeled_at": "2025-12-27T21:47:38.694881Z"
+    },
+    {
+      "id": "Rymer_VarneyTheVampire_Gutenberg_0346",
+      "split": "train",
+      "themes": [
+        "supernatural",
+        "persecution"
+      ],
+      "labeled_at": "2025-12-27T21:48:26.403130Z"
+    },
+    {
+      "id": "Godwin_CalebWilliams_Gutenberg_0069",
+      "split": "train",
+      "themes": [
+        "love",
+        "persecution"
+      ],
+      "labeled_at": "2025-12-27T21:49:49.045747Z"
+    },
+    {
+      "id": "ShelleyMary_Frankenstein_Gutenberg_0132",
+      "split": "train",
+      "themes": [
+        "supernatural",
+        "persecution",
+        "melancholy",
+        "nature"
+      ],
+      "labeled_at": "2025-12-27T21:51:01.121532Z"
+    },
+    {
+      "id": "Rymer_VarneyTheVampire_Gutenberg_0123",
+      "split": "train",
+      "themes": [
+        "supernatural"
+      ],
+      "labeled_at": "2025-12-27T21:51:58.856674Z"
+    },
+    {
+      "id": "Walpole_TheCastleOfOtranto_Gutenberg_0053",
+      "split": "train",
+      "themes": [
+        "death",
+        "family",
+        "terror"
+      ],
+      "labeled_at": "2025-12-27T21:52:53.142632Z"
+    },
+    {
+      "id": "Rymer_VarneyTheVampire_Gutenberg_0447",
+      "split": "train",
+      "themes": [
+        "death"
+      ],
+      "labeled_at": "2025-12-27T21:53:51.743762Z"
+    },
+    {
+      "id": "Radcliffe_TheMysteriesOfUdolpho_Gutenberg_0044",
+      "split": "val",
+      "themes": [
+        "death",
+        "family",
+        "melancholy",
+        "religion",
+        "nature"
+      ],
+      "labeled_at": "2025-12-27T21:55:28.254629Z"
+    },
+    {
+      "id": "BronteEmily_WutheringHeights_Gutenberg_0012",
+      "split": "test",
+      "themes": [
+        "supernatural",
+        "love",
+        "religion"
+      ],
+      "labeled_at": "2025-12-27T21:56:33.147841Z"
+    },
+    {
+      "id": "Smith_TheOldManorHouse_WomenWriters_0087",
+      "split": "train",
+      "themes": [
+        "persecution"
+      ],
+      "labeled_at": "2025-12-27T21:57:00.787120Z"
+    },
+    {
+      "id": "ShelleyMary_Frankenstein_Gutenberg_0162",
+      "split": "train",
+      "themes": [
+        "supernatural",
+        "nature"
+      ],
+      "labeled_at": "2025-12-27T21:57:39.946679Z"
+    },
+    {
+      "id": "Brown_ArthurMervyn_Gutenberg_0248",
+      "split": "train",
+      "themes": [
+        "imprisonment",
+        "death",
+        "terror"
+      ],
+      "labeled_at": "2025-12-27T21:58:28.937319Z"
+    },
+    {
+      "id": "Bronte_JaneEyre_Gutenberg_0273",
+      "split": "train",
+      "themes": [
+        "love",
+        "isolation",
+        "nature"
+      ],
+      "labeled_at": "2025-12-27T21:59:33.715153Z"
+    },
+    {
+      "id": "Radcliffe_TheRomanceOfTheForest_Adelaide_0007",
+      "split": "train",
+      "themes": [
+        "melancholy",
+        "nature"
+      ],
+      "labeled_at": "2025-12-27T22:01:23.682242Z"
+    },
+    {
+      "id": "Radcliffe_TheCastlesOfAthlynAndDunbayne_Gutenberg_0040",
+      "split": "val",
+      "themes": [
+        "persecution",
+        "family",
+        "melancholy"
+      ],
+      "labeled_at": "2025-12-27T22:03:28.778494Z"
+    },
+    {
+      "id": "LeFanu_Carmilla_Gutenberg_0028",
+      "split": "test",
+      "themes": [
+        "supernatural",
+        "terror"
+      ],
+      "labeled_at": "2025-12-27T22:04:37.887549Z"
+    },
+    {
+      "id": "Walpole_TheCastleOfOtranto_Gutenberg_0048",
+      "split": "train",
+      "themes": [
+        "persecution"
+      ],
+      "labeled_at": "2025-12-27T22:05:03.901518Z"
+    },
+    {
+      "id": "Haggard_She_Gutenberg_0061",
+      "split": "train",
+      "themes": [
+        "terror"
+      ],
+      "labeled_at": "2025-12-27T22:07:42.260269Z"
+    },
+    {
+      "id": "Stevenson_DrJekyllAndMrHyde_Gutenberg_0051",
+      "split": "train",
+      "themes": [
+        "supernatural",
+        "secrecy"
+      ],
+      "labeled_at": "2025-12-27T22:08:24.566877Z"
+    },
+    {
+      "id": "Rymer_VarneyTheVampire_Gutenberg_0372",
+      "split": "train",
+      "themes": [
+        "supernatural"
+      ],
+      "labeled_at": "2025-12-27T22:09:11.431626Z"
+    },
+    {
+      "id": "Maturin_Melmoth_Gutenberg_0234",
+      "split": "train",
+      "themes": [
+        "imprisonment",
+        "terror"
+      ],
+      "labeled_at": "2025-12-27T22:09:51.961035Z"
+    },
+    {
+      "id": "Dickens_BleakHouse_Gutenberg_0652",
+      "split": "val",
+      "themes": [
+        "persecution",
+        "isolation"
+      ],
+      "labeled_at": "2025-12-28T01:24:21.656899Z"
+    },
+    {
+      "id": "Machen_TheGreatGodPan_Gutenberg_0039",
+      "split": "test",
+      "themes": [
+        "supernatural",
+        "death",
+        "terror"
+      ],
+      "labeled_at": "2025-12-28T01:26:33.145596Z"
+    },
+    {
+      "id": "Godwin_CalebWilliams_Gutenberg_0330",
+      "split": "train",
+      "themes": [
+        "melancholy",
+        "isolation"
+      ],
+      "labeled_at": "2025-12-28T01:27:08.325229Z"
+    },
+    {
+      "id": "Radcliffe_TheItalian_eBooks_0339",
+      "split": "train",
+      "themes": [
+        "imprisonment",
+        "secrecy"
+      ],
+      "labeled_at": "2025-12-28T01:28:38.827397Z"
+    },
+    {
+      "id": "Roche_TheChildrenOfTheAbbey_OTA_0425",
+      "split": "train",
+      "themes": [
+        "secrecy",
+        "love"
+      ],
+      "labeled_at": "2025-12-28T01:29:26.653591Z"
+    },
+    {
+      "id": "Bronte_JaneEyre_Gutenberg_0403",
+      "split": "train",
+      "themes": [
+        "secrecy",
+        "love"
+      ],
+      "labeled_at": "2025-12-28T01:31:06.429906Z"
+    },
+    {
+      "id": "Lewis_TheMonk_Gutenberg_0063",
+      "split": "train",
+      "themes": [
+        "secrecy",
+        "isolation"
+      ],
+      "labeled_at": "2025-12-28T01:31:55.011157Z"
+    },
+    {
+      "id": "Smith_Emmeline_Gutenberg_0328",
+      "split": "train",
+      "themes": [
+        "melancholy",
+        "nature"
+      ],
+      "labeled_at": "2025-12-28T01:33:28.077945Z"
+    },
+    {
+      "id": "Radcliffe_TheMysteriesOfUdolpho_Gutenberg_0622",
+      "split": "val",
+      "themes": [
+        "death",
+        "family"
+      ],
+      "labeled_at": "2025-12-28T01:35:45.616585Z"
+    },
+    {
+      "id": "Dickens_TheMysteryOfEdwinDrood_Gutenberg_0113",
+      "split": "test",
+      "themes": [
+        "secrecy",
+        "love",
+        "nature"
+      ],
+      "labeled_at": "2025-12-28T01:37:24.885909Z"
+    },
+    {
+      "id": "Radcliffe_TheRomanceOfTheForest_Adelaide_0004",
+      "split": "train",
+      "themes": [
+        "imprisonment",
+        "secrecy",
+        "isolation"
+      ],
+      "labeled_at": "2025-12-28T01:38:46.905434Z"
+    },
+    {
+      "id": "Rymer_VarneyTheVampire_Gutenberg_0555",
+      "split": "train",
+      "themes": [
+        "supernatural",
+        "persecution"
+      ],
+      "labeled_at": "2025-12-28T01:39:58.783616Z"
+    },
+    {
+      "id": "Hogg_PrivateMemoirs_Gutenberg_0160",
+      "split": "train",
+      "themes": [
+        "religion"
+      ],
+      "labeled_at": "2025-12-28T01:40:41.260291Z"
+    },
+    {
+      "id": "Hogg_PrivateMemoirs_Gutenberg_0048",
+      "split": "train",
+      "themes": [
+        "imprisonment",
+        "secrecy"
+      ],
+      "labeled_at": "2025-12-28T01:41:40.038923Z"
+    },
+    {
+      "id": "Brown_ArthurMervyn_Gutenberg_0115",
+      "split": "train",
+      "themes": [
+        "death",
+        "family"
+      ],
+      "labeled_at": "2025-12-28T01:42:30.800643Z"
+    },
+    {
+      "id": "Schiller_TheGhostSeer_Gutenberg_0053",
+      "split": "val",
+      "themes": [
+        "secrecy",
+        "death"
+      ],
+      "labeled_at": "2025-12-28T01:44:33.490909Z"
+    },
+    {
+      "id": "BronteEmily_WutheringHeights_Gutenberg_0249",
+      "split": "test",
+      "themes": [
+        "secrecy",
+        "persecution",
+        "isolation"
+      ],
+      "labeled_at": "2025-12-28T02:07:46.277864Z"
+    },
+    {
+      "id": "Smith_TheOldManorHouse_WomenWriters_0145",
+      "split": "train",
+      "themes": [
+        "love"
+      ],
+      "labeled_at": "2025-12-28T02:16:13.968629Z"
+    },
+    {
+      "id": "Brown_Wieland_Gutenberg_0092",
+      "split": "train",
+      "themes": [
+        "love"
+      ],
+      "labeled_at": "2025-12-28T02:17:11.860556Z"
     }
   ],
-  "skipped": [],
-  "last_updated": "2025-12-27T20:26:46.284712Z"
+  "skipped": [
+    "Dickens_BleakHouse_Gutenberg_0337",
+    "BronteEmily_WutheringHeights_Gutenberg_0047",
+    "Brown_Wieland_Gutenberg_0017",
+    "Dickens_BleakHouse_Gutenberg_0290",
+    "Parsons_TheCastleOfWolfenbach_Gutenberg_0075",
+    "Dickens_BleakHouse_Gutenberg_0023",
+    "Leroux_ThePhantomOfTheOpera_Gutenberg_0188",
+    "Godwin_StLeon_Gutenberg_0067",
+    "Dickens_BleakHouse_Gutenberg_0576",
+    "Brown_ArthurMervyn_Gutenberg_0050"
+  ],
+  "last_updated": "2025-12-28T02:17:11.860582Z"
 }
