@@ -30,7 +30,7 @@ An NLP system for analyzing Gothic literature for thematic content and generatin
 | religion | Clergy, churches, monasteries, spiritual matters |
 | terror | Intense fear, horror, dread |
 | isolation | Loneliness, solitude, separation |
-| nature | Storms, wilderness, moonlight, atmosphere |
+| setting | Atmospheric environments—storms, wilderness, Gothic architecture |
 
 ## Labeling Tool
 

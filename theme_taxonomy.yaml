@@ -87,10 +87,12 @@ themes:
       - no friend, no companion, separated
       - exile, outcast, estranged
 
-  - name: nature
-    description: Storms, wilderness, moonlight, or atmospheric natural settings.
+  - name: setting
+    description: Atmospheric environments—storms, wilderness, moonlight, or Gothic architecture like castles, ruins, and abbeys.
     indicators:
       - storm, tempest, thunder, lightning
       - moon, moonlight, night, darkness
       - forest, wilderness, mountain, sea
       - wind, rain, mist, shadows
+      - castle, tower, dungeon, ruin
+      - abbey, cathedral, vault, crypt

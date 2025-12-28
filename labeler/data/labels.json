@@ -22,7 +22,7 @@
       "split": "test",
       "themes": [
         "secrecy",
-        "nature"
+        "setting"
       ],
       "labeled_at": "2025-12-27T20:18:32.461790Z"
     },
@@ -39,7 +39,7 @@
       "id": "Godwin_StLeon_Gutenberg_0043",
       "split": "train",
       "themes": [
-        "nature"
+        "setting"
       ],
       "labeled_at": "2025-12-27T20:21:33.762129Z"
     },
@@ -58,7 +58,7 @@
       "split": "train",
       "themes": [
         "religion",
-        "nature"
+        "setting"
       ],
       "labeled_at": "2025-12-27T20:23:27.736782Z"
     },
@@ -66,7 +66,7 @@
       "id": "Radcliffe_TheRomanceOfTheForest_Adelaide_0015",
       "split": "train",
       "themes": [
-        "nature"
+        "setting"
       ],
       "labeled_at": "2025-12-27T20:24:16.300281Z"
     },
@@ -84,7 +84,7 @@
       "id": "BronteEmily_WutheringHeights_Gutenberg_0005",
       "split": "test",
       "themes": [
-        "nature"
+        "setting"
       ],
       "labeled_at": "2025-12-27T20:26:46.284691Z"
     },
@@ -174,7 +174,7 @@
         "supernatural",
         "persecution",
         "melancholy",
-        "nature"
+        "setting"
       ],
       "labeled_at": "2025-12-27T21:51:01.121532Z"
     },
@@ -212,7 +212,7 @@
         "family",
         "melancholy",
         "religion",
-        "nature"
+        "setting"
       ],
       "labeled_at": "2025-12-27T21:55:28.254629Z"
     },
@@ -239,7 +239,7 @@
       "split": "train",
       "themes": [
         "supernatural",
-        "nature"
+        "setting"
       ],
       "labeled_at": "2025-12-27T21:57:39.946679Z"
     },
@@ -259,7 +259,7 @@
       "themes": [
         "love",
         "isolation",
-        "nature"
+        "setting"
       ],
       "labeled_at": "2025-12-27T21:59:33.715153Z"
     },
@@ -268,7 +268,7 @@
       "split": "train",
       "themes": [
         "melancholy",
-        "nature"
+        "setting"
       ],
       "labeled_at": "2025-12-27T22:01:23.682242Z"
     },
@@ -402,7 +402,7 @@
       "split": "train",
       "themes": [
         "melancholy",
-        "nature"
+        "setting"
       ],
       "labeled_at": "2025-12-28T01:33:28.077945Z"
     },
@@ -421,7 +421,7 @@
       "themes": [
         "secrecy",
         "love",
-        "nature"
+        "setting"
       ],
       "labeled_at": "2025-12-28T01:37:24.885909Z"
     },
