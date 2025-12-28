@@ -104,3 +104,27 @@ themes:
       - delirium, delirious, frenzied, frenzy
       - lunatic, maniac, deranged, unhinged
       - raving, distracted, disordered mind
+
+  - name: guilt
+    description: Psychological torment from past actions, remorse, self-accusation, or burden of conscience.
+    indicators:
+      - guilt, guilty, remorse, conscience
+      - repent, repentance, atonement, shame
+      - torment, haunt, accuse, blame
+      - confess, burden, wrongdoing, sin
+
+  - name: violence
+    description: Graphic depictions of physical attack, blood, wounds, or brutality.
+    indicators:
+      - blood, bloody, wound, wounded
+      - strike, struck, stab, stabbed
+      - attack, assault, brutal, savage
+      - blow, beaten, bruise, torn
+
+  - name: pursuit
+    description: Being chased, fleeing, escape attempts, or desperate flight.
+    indicators:
+      - pursue, pursued, chase, chased
+      - flee, fled, flight, escape
+      - hunt, hunted, follow, followed
+      - run, running, overtake, capture

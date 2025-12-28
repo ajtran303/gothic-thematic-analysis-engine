@@ -25,6 +25,7 @@ templates = Jinja2Templates(directory=BASE_DIR / "templates")
 
 # Target counts per split
 TARGETS = {"train": 400, "val": 75, "test": 75}
+SKIP_BUDGET_PERCENT = 0.10  # 10% of total target allowed as skips
 
 
 def load_passages() -> list[dict]:
@@ -123,15 +124,19 @@ async def next_passage():
 
     passage = get_next_passage(passages, labels)
     progress = get_progress(labels, passages)
+    total_skipped = len(labels.get("skipped", []))
+    skip_budget = int(sum(TARGETS.values()) * SKIP_BUDGET_PERCENT)
 
     if passage is None:
-        return {"done": True, "progress": progress}
+        return {"done": True, "progress": progress, "skipped": total_skipped, "skip_budget": skip_budget}
 
     return {
         "done": False,
         "passage": passage,
         "progress": progress,
-        "current_split": passage.get("split", "train")
+        "current_split": passage.get("split", "train"),
+        "skipped": total_skipped,
+        "skip_budget": skip_budget
     }
 
 
@@ -201,12 +206,46 @@ async def undo_label():
     passages = load_passages()
     passage = next((p for p in passages if p["id"] == last["id"]), None)
     progress = get_progress(labels, passages)
+    total_skipped = len(labels.get("skipped", []))
+    skip_budget = int(sum(TARGETS.values()) * SKIP_BUDGET_PERCENT)
 
     return {
         "success": True,
         "passage": passage,
         "previous_themes": last["themes"],
-        "progress": progress
+        "progress": progress,
+        "skipped": total_skipped,
+        "skip_budget": skip_budget
+    }
+
+
+@app.get("/api/review-skipped")
+async def review_skipped():
+    """Get a random skipped passage for review."""
+    passages = load_passages()
+    labels = load_labels()
+
+    skipped_ids = labels.get("skipped", [])
+    if not skipped_ids:
+        return {"done": True, "message": "No skipped passages to review"}
+
+    # Find the passage
+    passage = next((p for p in passages if p["id"] in skipped_ids), None)
+    if not passage:
+        return {"done": True, "message": "No skipped passages found"}
+
+    progress = get_progress(labels, passages)
+    total_skipped = len(skipped_ids)
+    skip_budget = int(sum(TARGETS.values()) * SKIP_BUDGET_PERCENT)
+
+    return {
+        "done": False,
+        "passage": passage,
+        "progress": progress,
+        "current_split": passage.get("split", "train"),
+        "skipped": total_skipped,
+        "skip_budget": skip_budget,
+        "reviewing_skipped": True
     }
 
 
@@ -220,10 +259,13 @@ async def get_progress_stats():
     total_labeled = len(labels.get("labeled", []))
     total_skipped = len(labels.get("skipped", []))
     total_target = sum(TARGETS.values())
+    skip_budget = int(total_target * SKIP_BUDGET_PERCENT)
 
     return {
         "by_split": progress,
         "total_labeled": total_labeled,
         "total_skipped": total_skipped,
-        "total_target": total_target
+        "total_target": total_target,
+        "skip_budget": skip_budget,
+        "over_skip_budget": total_skipped > skip_budget
     }

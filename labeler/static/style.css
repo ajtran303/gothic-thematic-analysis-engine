@@ -97,6 +97,25 @@ h2 .hint {
     color: var(--text-muted);
 }
 
+.progress-row.skip-budget {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+}
+
+.progress-row.skip-budget .progress-fill {
+    background: var(--text-muted);
+}
+
+.progress-row.skip-budget.over-budget .progress-fill {
+    background: #ef4444;
+}
+
+.progress-row.skip-budget.over-budget .progress-text {
+    color: #ef4444;
+    font-weight: 600;
+}
+
 /* Passage Section */
 .passage-meta {
     display: flex;
@@ -256,6 +275,25 @@ h2 .hint {
 
 .btn-secondary:hover {
     background: var(--bg-lighter);
+}
+
+.btn-review {
+    background: #f59e0b;
+    color: #1a1a2e;
+}
+
+.btn-review:hover {
+    background: #fbbf24;
+}
+
+.review-badge {
+    background: #f59e0b;
+    color: #1a1a2e;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
 }
 
 /* Shortcuts Section */

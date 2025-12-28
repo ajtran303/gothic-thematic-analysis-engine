@@ -36,12 +36,20 @@
                         </div>
                         <span class="progress-text" id="progress-test-text">0 / 75</span>
                     </div>
+                    <div class="progress-row skip-budget" id="skip-budget-row">
+                        <span class="split-name">Skips:</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-skips"></div>
+                        </div>
+                        <span class="progress-text" id="progress-skips-text">0 / 55</span>
+                    </div>
                 </div>
             </section>
 
             <section class="passage-section">
                 <div class="passage-meta">
                     <span>Currently labeling: <strong id="current-split">-</strong></span>
+                    <span id="review-badge" class="review-badge" style="display: none;">REVIEWING SKIPPED</span>
                     <span>Source: <strong id="passage-source">-</strong></span>
                 </div>
                 <div class="passage-text" id="passage-text">
@@ -56,7 +64,7 @@
                     <label class="theme-checkbox">
                         <input type="checkbox" name="theme" value="{{ theme.name }}" data-index="{{ loop.index0 }}">
                         <span class="theme-name">{{ theme.name }}</span>
-                        <span class="shortcut">{{ loop.index if loop.index < 10 else ('0' if loop.index == 10 else ('-' if loop.index == 11 else ('=' if loop.index == 12 else 'Q'))) }}</span>
+                        <span class="shortcut">{% if loop.index < 10 %}{{ loop.index }}{% elif loop.index == 10 %}0{% elif loop.index == 11 %}-{% elif loop.index == 12 %}={% elif loop.index == 13 %}Q{% elif loop.index == 14 %}W{% elif loop.index == 15 %}E{% elif loop.index == 16 %}R{% endif %}</span>
                         <span class="tooltip">{{ theme.description }}</span>
                     </label>
                     {% endfor %}
@@ -67,11 +75,12 @@
                 <button id="btn-submit" class="btn btn-primary">Submit & Next <span class="shortcut">Enter</span></button>
                 <button id="btn-skip" class="btn btn-secondary">Skip <span class="shortcut">S</span></button>
                 <button id="btn-undo" class="btn btn-secondary">Undo <span class="shortcut">U</span></button>
+                <button id="btn-review" class="btn btn-review">Review Skipped <span class="shortcut">Tab</span></button>
             </section>
 
             <section class="shortcuts-section">
                 <h3>Keyboard Shortcuts</h3>
-                <p><kbd>1</kbd>-<kbd>9</kbd>, <kbd>0</kbd>, <kbd>-</kbd>, <kbd>=</kbd>, <kbd>Q</kbd> Toggle themes | <kbd>Enter</kbd> Submit | <kbd>S</kbd> Skip | <kbd>U</kbd> Undo</p>
+                <p><kbd>1</kbd>-<kbd>9</kbd>, <kbd>0</kbd>, <kbd>-</kbd>, <kbd>=</kbd>, <kbd>Q</kbd><kbd>W</kbd><kbd>E</kbd><kbd>R</kbd> Toggle themes | <kbd>Enter</kbd> Submit | <kbd>S</kbd> Skip | <kbd>U</kbd> Undo | <kbd>Tab</kbd> Review Skipped</p>
             </section>
 
         <div id="done-message" class="done-message" style="display: none;">
@@ -82,12 +91,14 @@
 
     <script>
         let currentPassage = null;
+        let reviewMode = false;
 
         async function loadNext() {
             const res = await fetch('/api/next');
             const data = await res.json();
 
             updateProgress(data.progress);
+            updateSkipBudget(data.skipped, data.skip_budget);
 
             if (data.done) {
                 showDone();
@@ -103,6 +114,9 @@
                 `${currentPassage.author} - ${currentPassage.title}`;
 
             document.querySelectorAll('input[name="theme"]').forEach(cb => cb.checked = false);
+            document.getElementById('review-badge').style.display = 'none';
+            reviewMode = false;
+            updateReviewButton();
         }
 
         function updateProgress(progress) {
@@ -111,6 +125,19 @@
                 document.getElementById(`progress-${split}`).style.width = `${pct}%`;
                 document.getElementById(`progress-${split}-text`).textContent =
                     `${data.current} / ${data.target}`;
+            }
+        }
+
+        function updateSkipBudget(skipped, budget) {
+            const pct = Math.min(100, (skipped / budget) * 100);
+            document.getElementById('progress-skips').style.width = `${pct}%`;
+            document.getElementById('progress-skips-text').textContent = `${skipped} / ${budget}`;
+
+            const row = document.getElementById('skip-budget-row');
+            if (skipped > budget) {
+                row.classList.add('over-budget');
+            } else {
+                row.classList.remove('over-budget');
             }
         }
 
@@ -133,7 +160,11 @@
                 body: JSON.stringify({id: currentPassage.id, split: currentPassage.split, themes})
             });
 
-            loadNext();
+            if (reviewMode) {
+                loadSkipped();
+            } else {
+                loadNext();
+            }
         }
 
         async function skipPassage() {
@@ -167,6 +198,55 @@
             });
 
             updateProgress(data.progress);
+            updateSkipBudget(data.skipped, data.skip_budget);
+            document.getElementById('review-badge').style.display = 'none';
+            reviewMode = false;
+            updateReviewButton();
+        }
+
+        function updateReviewButton() {
+            const btn = document.getElementById('btn-review');
+            if (reviewMode) {
+                btn.innerHTML = 'Back to Labeling <span class="shortcut">Tab</span>';
+            } else {
+                btn.innerHTML = 'Review Skipped <span class="shortcut">Tab</span>';
+            }
+        }
+
+        async function toggleReviewMode() {
+            reviewMode = !reviewMode;
+            updateReviewButton();
+            if (reviewMode) {
+                await loadSkipped();
+            } else {
+                await loadNext();
+            }
+        }
+
+        async function loadSkipped() {
+            const res = await fetch('/api/review-skipped');
+            const data = await res.json();
+
+            if (data.done) {
+                reviewMode = false;
+                updateReviewButton();
+                alert(data.message || 'No skipped passages to review');
+                return;
+            }
+
+            currentPassage = data.passage;
+            const passageEl = document.getElementById('passage-text');
+            passageEl.textContent = currentPassage.text;
+            passageEl.scrollTop = 0;
+            document.getElementById('current-split').textContent = data.current_split;
+            document.getElementById('passage-source').textContent =
+                `${currentPassage.author} - ${currentPassage.title}`;
+            document.getElementById('review-badge').style.display = 'inline';
+
+            document.querySelectorAll('input[name="theme"]').forEach(cb => cb.checked = false);
+
+            updateProgress(data.progress);
+            updateSkipBudget(data.skipped, data.skip_budget);
         }
 
         function toggleTheme(index) {
@@ -200,12 +280,22 @@
                 toggleTheme(11);
             } else if (key === 'q') {
                 toggleTheme(12);
+            } else if (key === 'w') {
+                toggleTheme(13);
+            } else if (key === 'e') {
+                toggleTheme(14);
+            } else if (key === 'r') {
+                toggleTheme(15);
+            } else if (key === 'tab') {
+                e.preventDefault();
+                toggleReviewMode();
             }
         });
 
         document.getElementById('btn-submit').addEventListener('click', submitLabel);
         document.getElementById('btn-skip').addEventListener('click', skipPassage);
         document.getElementById('btn-undo').addEventListener('click', undoLabel);
+        document.getElementById('btn-review').addEventListener('click', toggleReviewMode);
 
         loadNext();
     </script>
