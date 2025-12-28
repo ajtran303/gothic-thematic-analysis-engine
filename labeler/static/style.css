@@ -334,6 +334,22 @@ h2 .hint {
     text-transform: uppercase;
 }
 
+/* Timer */
+.timer {
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    background: var(--bg);
+    color: var(--text-muted);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.timer.over-time {
+    background: #ef4444;
+    color: white;
+}
+
 /* Shortcuts Section */
 .shortcuts-section {
     background: transparent;

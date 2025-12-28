@@ -39,13 +39,14 @@ themes:
       - grief, mourning, loss, killed
       - last breath, expired, lifeless
 
-  - name: persecution
-    description: Characters threatened, pursued, or victimized. Villains and injustice.
+  - name: villainy
+    description: Scheming, conspiracy, treachery, persecution, or antagonistic behavior. Villains victimizing others.
     indicators:
       - villain, tyrant, persecutor, enemy
       - pursued, threatened, hunted, accused
       - scheme, plot, treachery, revenge
       - victim, injustice, oppression
+      - conspiracy, betrayal, deceive, manipulate
 
   - name: family
     description: Parent-child bonds, inheritance, lineage, and duty to kin.

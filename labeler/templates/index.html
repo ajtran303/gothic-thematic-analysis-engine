@@ -50,6 +50,7 @@
                 <div class="passage-meta">
                     <span>Currently labeling: <strong id="current-split">-</strong></span>
                     <span id="review-badge" class="review-badge" style="display: none;">REVIEWING SKIPPED</span>
+                    <span class="timer" id="timer">0:00</span>
                     <span>Source: <strong id="passage-source">-</strong></span>
                 </div>
                 <div class="summary-container" id="summary-container" style="display: none;">
@@ -101,6 +102,30 @@
         let currentSummary = null;
         let reviewMode = false;
         let summaryVisible = false;
+        let timerInterval = null;
+        let timerSeconds = 0;
+
+        function resetTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timerSeconds = 0;
+            updateTimerDisplay();
+            timerInterval = setInterval(() => {
+                timerSeconds++;
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const timerEl = document.getElementById('timer');
+            const mins = Math.floor(timerSeconds / 60);
+            const secs = timerSeconds % 60;
+            timerEl.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+            if (timerSeconds >= 15) {
+                timerEl.classList.add('over-time');
+            } else {
+                timerEl.classList.remove('over-time');
+            }
+        }
 
         function showSummary(summary) {
             currentSummary = summary;
@@ -163,6 +188,7 @@
             document.getElementById('review-badge').style.display = 'none';
             reviewMode = false;
             updateReviewButton();
+            resetTimer();
         }
 
         function updateProgress(progress) {
@@ -222,7 +248,11 @@
                 body: JSON.stringify({id: currentPassage.id})
             });
 
-            loadNext();
+            if (reviewMode) {
+                loadSkipped();
+            } else {
+                loadNext();
+            }
         }
 
         async function undoLabel() {
@@ -249,6 +279,7 @@
             document.getElementById('review-badge').style.display = 'none';
             reviewMode = false;
             updateReviewButton();
+            resetTimer();
         }
 
         function updateReviewButton() {
@@ -295,6 +326,7 @@
 
             updateProgress(data.progress);
             updateSkipBudget(data.skipped, data.skip_budget);
+            resetTimer();
         }
 
         function toggleTheme(index) {
