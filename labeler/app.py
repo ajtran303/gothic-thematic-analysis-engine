@@ -19,6 +19,8 @@ DATA_DIR = BASE_DIR / "data"
 LABELS_FILE = DATA_DIR / "labels.json"
 PASSAGES_FILE = DATA_DIR / "passages.json"
 TAXONOMY_FILE = BASE_DIR.parent / "theme_taxonomy.yaml"
+TARGET_PASSAGES_FILE = DATA_DIR / "target_passages.json"
+SUMMARIES_FILE = DATA_DIR / "summaries.json"
 
 app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
 templates = Jinja2Templates(directory=BASE_DIR / "templates")
@@ -58,6 +60,22 @@ def load_themes() -> list[dict]:
     return data.get("themes", [])
 
 
+def load_target_passages() -> list[str]:
+    """Load target passage IDs."""
+    if not TARGET_PASSAGES_FILE.exists():
+        return []
+    with open(TARGET_PASSAGES_FILE) as f:
+        return json.load(f)
+
+
+def load_summaries() -> dict:
+    """Load passage summaries."""
+    if not SUMMARIES_FILE.exists():
+        return {}
+    with open(SUMMARIES_FILE) as f:
+        return json.load(f)
+
+
 def get_labeled_ids(labels: dict) -> set[str]:
     """Get set of all labeled and skipped passage IDs."""
     labeled_ids = {item["id"] for item in labels.get("labeled", [])}
@@ -86,6 +104,7 @@ def get_next_passage(passages: list[dict], labels: dict) -> dict | None:
     """Get next unlabeled passage, prioritizing by split target completion."""
     labeled_ids = get_labeled_ids(labels)
     progress = get_progress(labels, passages)
+    target_ids = set(load_target_passages())
 
     # Determine which split to prioritize (least complete first)
     split_order = sorted(
@@ -97,8 +116,13 @@ def get_next_passage(passages: list[dict], labels: dict) -> dict | None:
         if progress[split]["current"] >= progress[split]["target"]:
             continue
 
-        # Get unlabeled passages from this split
-        unlabeled = [p for p in passages if p["id"] not in labeled_ids and p.get("split") == split]
+        # Get unlabeled passages from this split (only from target list)
+        unlabeled = [
+            p for p in passages
+            if p["id"] not in labeled_ids
+            and p.get("split") == split
+            and (not target_ids or p["id"] in target_ids)  # Filter by target if available
+        ]
         if unlabeled:
             return random.choice(unlabeled)
 
@@ -121,6 +145,7 @@ async def next_passage():
     """Get the next unlabeled passage."""
     passages = load_passages()
     labels = load_labels()
+    summaries = load_summaries()
 
     passage = get_next_passage(passages, labels)
     progress = get_progress(labels, passages)
@@ -136,7 +161,8 @@ async def next_passage():
         "progress": progress,
         "current_split": passage.get("split", "train"),
         "skipped": total_skipped,
-        "skip_budget": skip_budget
+        "skip_budget": skip_budget,
+        "summary": summaries.get(passage["id"])
     }
 
 
@@ -194,6 +220,7 @@ async def skip_passage(request: Request):
 async def undo_label():
     """Undo the last label and return that passage."""
     labels = load_labels()
+    summaries = load_summaries()
 
     if not labels["labeled"]:
         return {"error": "Nothing to undo"}
@@ -215,7 +242,8 @@ async def undo_label():
         "previous_themes": last["themes"],
         "progress": progress,
         "skipped": total_skipped,
-        "skip_budget": skip_budget
+        "skip_budget": skip_budget,
+        "summary": summaries.get(passage["id"]) if passage else None
     }
 
 
@@ -224,6 +252,7 @@ async def review_skipped():
     """Get a random skipped passage for review."""
     passages = load_passages()
     labels = load_labels()
+    summaries = load_summaries()
 
     skipped_ids = labels.get("skipped", [])
     if not skipped_ids:
@@ -245,7 +274,8 @@ async def review_skipped():
         "current_split": passage.get("split", "train"),
         "skipped": total_skipped,
         "skip_budget": skip_budget,
-        "reviewing_skipped": True
+        "reviewing_skipped": True,
+        "summary": summaries.get(passage["id"])
     }
 
 

@@ -52,6 +52,13 @@
                     <span id="review-badge" class="review-badge" style="display: none;">REVIEWING SKIPPED</span>
                     <span>Source: <strong id="passage-source">-</strong></span>
                 </div>
+                <div class="summary-container" id="summary-container" style="display: none;">
+                    <button class="summary-btn" id="btn-toggle-summary">
+                        Show Summary <span class="shortcut">?</span>
+                    </button>
+                    <div class="summary-content" id="summary-content" style="display: none;">
+                    </div>
+                </div>
                 <div class="passage-text" id="passage-text">
                     Loading...
                 </div>
@@ -80,7 +87,7 @@
 
             <section class="shortcuts-section">
                 <h3>Keyboard Shortcuts</h3>
-                <p><kbd>1</kbd>-<kbd>9</kbd>, <kbd>0</kbd>, <kbd>-</kbd>, <kbd>=</kbd>, <kbd>Q</kbd><kbd>W</kbd><kbd>E</kbd><kbd>R</kbd> Toggle themes | <kbd>Enter</kbd> Submit | <kbd>S</kbd> Skip | <kbd>U</kbd> Undo | <kbd>Tab</kbd> Review Skipped</p>
+                <p><kbd>1</kbd>-<kbd>9</kbd>, <kbd>0</kbd>, <kbd>-</kbd>, <kbd>=</kbd>, <kbd>Q</kbd><kbd>W</kbd><kbd>E</kbd><kbd>R</kbd> Toggle themes | <kbd>Enter</kbd> Submit | <kbd>S</kbd> Skip | <kbd>U</kbd> Undo | <kbd>Tab</kbd> Review Skipped | <kbd>?</kbd> Summary</p>
             </section>
 
         <div id="done-message" class="done-message" style="display: none;">
@@ -91,7 +98,45 @@
 
     <script>
         let currentPassage = null;
+        let currentSummary = null;
         let reviewMode = false;
+        let summaryVisible = false;
+
+        function showSummary(summary) {
+            currentSummary = summary;
+            const container = document.getElementById('summary-container');
+            const content = document.getElementById('summary-content');
+            const btn = document.getElementById('btn-toggle-summary');
+
+            if (summary) {
+                container.style.display = 'block';
+                content.textContent = summary;
+                content.style.display = 'none';
+                btn.innerHTML = 'Show Summary <span class="shortcut">?</span>';
+                btn.classList.remove('active');
+                summaryVisible = false;
+            } else {
+                container.style.display = 'none';
+            }
+        }
+
+        function toggleSummary() {
+            if (!currentSummary) return;
+
+            const content = document.getElementById('summary-content');
+            const btn = document.getElementById('btn-toggle-summary');
+
+            summaryVisible = !summaryVisible;
+            if (summaryVisible) {
+                content.style.display = 'block';
+                btn.innerHTML = 'Hide Summary <span class="shortcut">?</span>';
+                btn.classList.add('active');
+            } else {
+                content.style.display = 'none';
+                btn.innerHTML = 'Show Summary <span class="shortcut">?</span>';
+                btn.classList.remove('active');
+            }
+        }
 
         async function loadNext() {
             const res = await fetch('/api/next');
@@ -113,6 +158,7 @@
             document.getElementById('passage-source').textContent =
                 `${currentPassage.author} - ${currentPassage.title}`;
 
+            showSummary(data.summary);
             document.querySelectorAll('input[name="theme"]').forEach(cb => cb.checked = false);
             document.getElementById('review-badge').style.display = 'none';
             reviewMode = false;
@@ -193,6 +239,7 @@
             document.getElementById('passage-source').textContent =
                 `${currentPassage.author} - ${currentPassage.title}`;
 
+            showSummary(data.summary);
             document.querySelectorAll('input[name="theme"]').forEach(cb => {
                 cb.checked = data.previous_themes.includes(cb.value);
             });
@@ -243,6 +290,7 @@
                 `${currentPassage.author} - ${currentPassage.title}`;
             document.getElementById('review-badge').style.display = 'inline';
 
+            showSummary(data.summary);
             document.querySelectorAll('input[name="theme"]').forEach(cb => cb.checked = false);
 
             updateProgress(data.progress);
@@ -289,10 +337,14 @@
             } else if (key === 'tab') {
                 e.preventDefault();
                 toggleReviewMode();
+            } else if (e.key === '?') {
+                e.preventDefault();
+                toggleSummary();
             }
         });
 
         document.getElementById('btn-submit').addEventListener('click', submitLabel);
+        document.getElementById('btn-toggle-summary').addEventListener('click', toggleSummary);
         document.getElementById('btn-skip').addEventListener('click', skipPassage);
         document.getElementById('btn-undo').addEventListener('click', undoLabel);
         document.getElementById('btn-review').addEventListener('click', toggleReviewMode);

@@ -125,6 +125,44 @@ h2 .hint {
     font-size: 0.9rem;
 }
 
+/* Summary Toggle */
+.summary-container {
+    margin-bottom: 1rem;
+}
+
+.summary-btn {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.summary-btn:hover {
+    background: var(--bg-lighter);
+    color: var(--text);
+}
+
+.summary-btn.active {
+    background: var(--bg-lighter);
+    color: var(--text);
+    border-color: var(--accent);
+}
+
+.summary-content {
+    background: #2a2a3d;
+    border-left: 3px solid #7c3aed;
+    padding: 1rem 1.25rem;
+    margin-top: 0.75rem;
+    border-radius: 0 6px 6px 0;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #c8c8d8;
+}
+
 .passage-text {
     font-size: 1.25rem;
     line-height: 1.8;
