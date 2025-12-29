@@ -21,7 +21,9 @@ print(f"Evaluating on {len(texts)} validation passages\n")
 
 X_val = vectorizer.transform(texts)
 y_true = mlb.transform(labels)
-y_pred = classifier.predict(X_val)
+probs = classifier.predict_proba(X_val)
+threshold = 0.25  # Lower from default 0.5
+y_pred = (probs >= threshold).astype(int)
 
 
 print("=== Overall Metrics ===")
