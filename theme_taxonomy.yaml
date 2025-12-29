@@ -7,13 +7,16 @@ themes:
       - supernatural, unearthly, from the grave
       - embalmed, risen, visitation
 
-  - name: imprisonment
-    description: Physical captivity, confinement, or detention. Escape attempts and rescue.
+  - name: captivity
+    description: Physical captivity, confinement, detention, being chased, or fleeing. Escape attempts and rescue.
     indicators:
       - prisoner, captive, confined, detained
       - dungeon, cell, tower, locked, chains
       - escape, fled, rescue, deliverance
       - seized, entrapped, held against will
+      - pursue, pursued, chase, chased
+      - flee, flight, hunt, hunted
+      - run, running, overtake, capture
 
   - name: secrecy
     description: Hidden information, concealed identities, or characters withholding truth.
@@ -31,13 +34,17 @@ themes:
       - tender, devoted, longing, jealous
       - kiss, embrace, wedding, parting
 
-  - name: death
-    description: Dying, corpses, murder, or confronting mortality. Grief and mourning.
+  - name: harm
+    description: Death, dying, murder, corpses, violence, blood, or physical brutality.
     indicators:
       - death, dying, dead, corpse, body
       - grave, tomb, funeral, burial, murder
       - grief, mourning, loss, killed
       - last breath, expired, lifeless
+      - blood, bloody, wound, wounded
+      - strike, struck, stab, stabbed
+      - attack, assault, brutal, savage
+      - blow, beaten, bruise, torn
 
   - name: villainy
     description: Scheming, conspiracy, treachery, persecution, or antagonistic behavior. Villains victimizing others.
@@ -56,37 +63,31 @@ themes:
       - ancestor, lineage, bloodline
       - duty, consent, forbid, disobey
 
-  - name: melancholy
-    description: Sadness, regret, emotional suffering, or despair.
+  - name: sorrow
+    description: Sadness, regret, emotional suffering, despair, loneliness, or isolation.
     indicators:
       - melancholy, sorrow, grief, despair
       - tears, weeping, sighing, dejected
       - gloomy, wretched, miserable
       - regret, lament, anguish, woe
+      - alone, lonely, solitary, isolated
+      - abandoned, forsaken, deserted
+      - no friend, no companion, separated
+      - exile, outcast, estranged
 
-  - name: religion
-    description: Clergy, churches, monasteries, or spiritual matters.
-    indicators:
-      - priest, friar, monk, nun, confessor
-      - church, chapel, monastery, convent
-      - prayer, blessing, sin, confession
-      - heaven, hell, soul, sacred
-
-  - name: terror
-    description: Intense fear, horror, dread, or fright.
+  - name: anguish
+    description: Intense fear, horror, dread, guilt, remorse, insanity, or psychological torment.
     indicators:
       - terror, horror, dread, fright, fear
       - trembling, shuddering, pale, gasped
       - scream, shriek, alarmed, panic
       - nightmare, apprehension, aghast
-
-  - name: isolation
-    description: Loneliness, solitude, or separation from others. Wanting companionship.
-    indicators:
-      - alone, lonely, solitary, isolated
-      - abandoned, forsaken, deserted
-      - no friend, no companion, separated
-      - exile, outcast, estranged
+      - mad, madness, insane, insanity
+      - delirium, delirious, frenzied, frenzy
+      - lunatic, maniac, deranged, unhinged
+      - guilt, guilty, remorse, conscience
+      - repent, repentance, atonement, shame
+      - torment, haunt, accuse, blame
 
   - name: setting
     description: Atmospheric environments—storms, wilderness, moonlight, or Gothic architecture like castles, ruins, and abbeys.
@@ -97,35 +98,3 @@ themes:
       - wind, rain, mist, shadows
       - castle, tower, dungeon, ruin
       - abbey, cathedral, vault, crypt
-
-  - name: madness
-    description: Insanity, mental instability, delirium, or psychological breakdown.
-    indicators:
-      - mad, madness, insane, insanity
-      - delirium, delirious, frenzied, frenzy
-      - lunatic, maniac, deranged, unhinged
-      - raving, distracted, disordered mind
-
-  - name: guilt
-    description: Psychological torment from past actions, remorse, self-accusation, or burden of conscience.
-    indicators:
-      - guilt, guilty, remorse, conscience
-      - repent, repentance, atonement, shame
-      - torment, haunt, accuse, blame
-      - confess, burden, wrongdoing, sin
-
-  - name: violence
-    description: Graphic depictions of physical attack, blood, wounds, or brutality.
-    indicators:
-      - blood, bloody, wound, wounded
-      - strike, struck, stab, stabbed
-      - attack, assault, brutal, savage
-      - blow, beaten, bruise, torn
-
-  - name: pursuit
-    description: Being chased, fleeing, escape attempts, or desperate flight.
-    indicators:
-      - pursue, pursued, chase, chased
-      - flee, fled, flight, escape
-      - hunt, hunted, follow, followed
-      - run, running, overtake, capture
