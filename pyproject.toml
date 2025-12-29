@@ -5,6 +5,7 @@ description = "NLP system for analyzing and generating Gothic literature with co
 requires-python = ">=3.10"
 dependencies = [
     "pyyaml>=6.0",
+    "scikit-learn>=1.0"
 ]
 
 [project.optional-dependencies]
