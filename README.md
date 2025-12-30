@@ -5,7 +5,8 @@ An NLP system for analyzing Gothic literature for thematic content and generatin
 ## Status
 
 **Phase 1 (Foundation):** Complete
-**Phase 2 (Analyzer):** In progress - manual labeling
+**Phase 2 (Analyzer):** Complete - classifier trained, corpus auto-tagged
+**Phase 3 (Generator):** In progress - fine-tuning
 
 ## Data
 
@@ -15,23 +16,20 @@ An NLP system for analyzing Gothic literature for thematic content and generatin
 
 ## Theme Taxonomy
 
-13 themes derived from corpus sampling:
+10 themes derived from corpus sampling:
 
-| Theme        | Description                                                      |
-| ------------ | ---------------------------------------------------------------- |
-| supernatural | Vampires, ghosts, apparitions, the undead                        |
-| imprisonment | Physical captivity, confinement, escape attempts                 |
-| secrecy      | Hidden information, concealed identities                         |
-| love         | Romantic attachment, courtship, passion                          |
-| death        | Dying, murder, grief, confronting mortality                      |
-| persecution  | Characters threatened, pursued, or victimized                    |
-| family       | Parent-child bonds, inheritance, lineage                         |
-| melancholy   | Sadness, regret, emotional suffering                             |
-| religion     | Clergy, churches, monasteries, spiritual matters                 |
-| terror       | Intense fear, horror, dread                                      |
-| isolation    | Loneliness, solitude, separation                                 |
-| setting      | Atmospheric environments—storms, wilderness, Gothic architecture |
-| madness      | Insanity, mental instability, delirium, psychological breakdown  |
+| Theme        | Description                                                        |
+| ------------ | ------------------------------------------------------------------ |
+| supernatural | Vampires, ghosts, apparitions, the undead                          |
+| captivity    | Physical captivity, confinement, being chased, escape attempts     |
+| secrecy      | Hidden information, concealed identities                           |
+| love         | Romantic attachment, courtship, passion                            |
+| harm         | Death, dying, murder, violence, blood, physical brutality          |
+| villainy     | Scheming, treachery, persecution, antagonistic behavior            |
+| family       | Parent-child bonds, inheritance, lineage                           |
+| sorrow       | Sadness, despair, loneliness, isolation                            |
+| anguish      | Terror, horror, dread, guilt, insanity, psychological torment      |
+| setting      | Atmospheric environments—storms, wilderness, Gothic architecture   |
 
 ## Labeling Tool
 
