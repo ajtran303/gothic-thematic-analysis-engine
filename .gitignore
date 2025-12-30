@@ -36,6 +36,8 @@ models/generator/
 
 # Large intermediate files (regenerate with scripts)
 data/chunks/
+data/generator_training.txt
+data/tagged_corpus.json
 
 # Jupyter
 .ipynb_checkpoints/
